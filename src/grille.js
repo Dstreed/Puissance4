@@ -139,12 +139,16 @@ const verifVertic = () => {
     }
 }
 
+////////////////////////////////////////////////// début de en test //////////////////////////////////////////////////////////////////////////////////////
+
+//les diagonales ne fonctionnent pas correctement, j'ai fait trop compliqué
+
 const verifDiag1 = () => {
-    for (let x = 1, long = 6; x <= 3; x += 1, long - 1) {
+    for (let x = 1, long = 6; x <= 3; x += 1, long -= 1) {
         let compteur = 1
-        for (let xa = x, y = 5; xa <= long; xa += 1, y -= 1) {
+        for (let xa = x, y = 5; xa < long; xa += 1, y -= 1) {
             if (compteur >= 4) {
-                victoire()
+                console.log('victoire')
             } else {
                 if (grille[y][xa] == ' ' || grille[y - 1][xa + 1] == ' ') {
                     compteur = 1
@@ -159,7 +163,94 @@ const verifDiag1 = () => {
         }
     }
 }
-////////////////////////////////////////////////// début de en test //////////////////////////////////////////////////////////////////////////////////////
+
+///
+
+const verifDiag2 = () => {
+    for (let x = 3, long = 4; x <= 5; x += 1, long += 1) {
+        let compteur = 1
+        for (let xa = x, y = 0; xa > long; xa -= 1, y += 1) {
+            if (compteur >= 4) {
+                console.log('victoire')
+            } else {
+                if (grille[y][xa] == ' ' || grille[y + 1][xa - 1] == ' ') {
+                    compteur = 1
+                } else {
+                    if (grille[y][xa] == grille[y + 1][xa - 1]) {
+                        compteur += 1
+                    } else {
+                        compteur = 1
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+const verifDiag2 = () => {
+    for (let ya = 5, long = 6; ya <= 3; ya -= 1, long -= 1) {
+        let compteur = 1
+        for (let xa = 0, y = ya; xa < long; xa += 1, y -= 1) {
+            if (compteur >= 4) {
+                console.log('victoire')
+            } else {
+                if (grille[y][xa] == ' ' || grille[y - 1][xa + 1] == ' ') {
+                    compteur = 1
+                } else {
+                    if (grille[y][xa] == grille[y - 1][xa + 1]) {
+                        compteur += 1
+                    } else {
+                        compteur = 1
+                    }
+                }
+            }
+        }
+    }
+}
+*/
+const verifDiag3 = () => {
+    for (let x = 1, long = 4; x <= 3; x += 1, long += 1) {
+        let compteur = 1
+        for (let xa = x, y = 0; xa > long; xa += 1, y += 1) {
+            if (compteur >= 4) {
+                console.log('victoire')
+            } else {
+                if (grille[y][xa] == ' ' || grille[y + 1][xa + 1] == ' ') {
+                    compteur = 1
+                } else {
+                    if (grille[y][xa] == grille[y + 1][xa + 1]) {
+                        compteur += 1
+                    } else {
+                        compteur = 1
+                    }
+                }
+            }
+        }
+    }
+}
+
+const verifDiag4 = () => {
+    for (let ya = 0, long = 6; ya >= 2; ya += 1, long -= 1) {
+        let compteur = 1
+        for (let xa = 0, y = ya; xa < long - 1; xa += 1, y += 1) {
+            if (compteur >= 4) {
+                console.log('victoire')
+            } else {
+                if (grille[y][xa] == ' ' || grille[y + 1][xa + 1] == ' ') {
+                    compteur = 1
+                } else {
+                    if (grille[y][xa] == grille[y + 1][xa + 1]) {
+                        compteur += 1
+                        console.log('+1')
+                    } else {
+                        compteur = 1
+                    }
+                }
+            }
+        }
+    }
+}
 
 ////////////////////////////////////////////////// fin de en test //////////////////////////////////////////////////////////////////////////////////////
 
@@ -170,11 +261,12 @@ export const jeu = () => {
         verifHoriz()
         verifVertic()
         verifDiag1()
+        verifDiag2()
+        verifDiag3()
+        verifDiag4()
         console.log('tour', tours)
-        console.log('jeton', jeton)
         tour()
         jouer()
-
         descend()
     }
 }
